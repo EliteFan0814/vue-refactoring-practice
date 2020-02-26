@@ -2,13 +2,8 @@ import Vue from 'vue'
 import store from '@/store'
 import axios from 'axios'
 import Qs from 'qs'
-import {
-  Message
-} from 'element-ui'
-import {
-  getCookie,
-  setCookie
-} from './cookie.js'
+import { Message } from 'element-ui'
+import { getCookie, setCookie } from './cookie.js'
 
 const request = axios.create({
   // 仅在开发环境走代理
@@ -33,7 +28,6 @@ request.interceptors.request.use(
         ...config.headers
       }
     }
-
     return config
   },
   err => {
@@ -45,18 +39,19 @@ request.interceptors.response.use(
   res => {
     if (res.data.success || res.data.code === 1) {
       // successcess
-      if (res.data.msg && res.data.msg != "ok") Message.success(res.data.msg)
+      if (res.data.msg && res.data.msg != "ok") {
+        Message.success(res.data.msg)
+      }
+      return res.data
     }
     if (res.data.code === 0) {
       Message.error(res.data.msg)
     }
-
-    if (res.data.success || res.data.code === 1) return res.data
+    // if (res.data.success || res.data.code === 1) return res.data
     return Promise.reject(res.data)
   },
   err => {
     // token 失效
-
     if (err.response) {
       if (err.response.status === 401) {
         Message.error('请重新登陆')
@@ -75,8 +70,6 @@ request.interceptors.response.use(
       }
     }
     // Message.error('网络错误，请重试')
-
-
     return Promise.reject(err)
   }
 )

@@ -14,7 +14,8 @@ Vue.use(ElementUI)
 Vue.use(VueAMap);
 Vue.prototype.$config = config;
 VueAMap.initAMapApiLoader({
-  key: 'c66ac6017f5ae9df99ebbc9b0cb7442c',
+  // key: 'c66ac6017f5ae9df99ebbc9b0cb7442c',
+  key: '6be7de40d996d166b728662d0aef2031',
   plugin: ['AMap.Geocoder', 'AMap.Geolocation', 'AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
   // 默认高德 sdk 版本为 1.4.4
   v: '1.4.4',
@@ -24,17 +25,17 @@ VueAMap.initAMapApiLoader({
 
 Vue.config.productionTip = false
 
-// router.beforeEach((to, from, next) => {
-//   if (store.state.token) { //如果有就直接到首页咯
-//     next();
-//   } else {
-//     if (to.path === '/login') { //如果是登录页面路径，就直接next()
-//       next();
-//     } else { //不然就跳转到登录；
-//       next('/login');
-//     }
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (store.state.token) { //如果有就直接到首页咯
+    next();
+  } else {
+    if (to.path === '/login') { //如果是登录页面路径，就直接next()
+      next();
+    } else { //不然就跳转到登录；
+      next('/login');
+    }
+  }
+})
 
 new Vue({
   router,

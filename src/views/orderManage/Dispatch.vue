@@ -129,7 +129,7 @@ export default {
         if(!valid) return
         this.$http.post('/manage/order/paidan',this.formData).then(res=>{
           this.reload()
-        })
+        }).catch(err=>{})
       })
     },
     // 取消订单

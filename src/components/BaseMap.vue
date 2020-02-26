@@ -106,7 +106,7 @@ export default {
               self.address = poiResult.item.district + poiResult.item.name
               self.adcode = poiResult.item.adcode
               self.is_click = true
-              self.$emit('getAddress', self.address)
+              self.$emit('getAddress', self.address, self.lng, self.lat)
               //用户选中的poi点信息
               // 根据 adcode 切换成 province_id city_id  county_id
               // self.tranceAdcodeToId(self.adcode)
@@ -123,14 +123,12 @@ export default {
               // 如果用户存在，就获取用户的经纬度
               if (self.user_id) {
                 self.getUserLocation(self.user_id).then(res => {
-                  console.log('成功获取用户经纬', res)
                   self.lng = res.lng
                   self.lat = res.lat
                   self.address = res.address
                   self.center = [self.lng, self.lat]
                   self.loaded = true
                   self.is_click = true
-                  console.log('初始定位时发送给父组件', self.location_info)
                   self.$emit('getPosition', self.location_info)
                 })
               } else {
@@ -138,14 +136,13 @@ export default {
                 o.getCurrentPosition((status, result) => {
                   self.address = '正在定位，请稍等...'
                   if (result && result.position) {
-                    console.log('result', result)
                     self.lng = result.position.lng
                     self.lat = result.position.lat
                     self.address = result.formattedAddress
                     self.center = [self.lng, self.lat]
                     self.loaded = true
                     self.is_click = true
-                    self.$emit('getAddress', self.address)
+                    self.$emit('getAddress', self.address, self.lng, self.lat)
                     // self.tranceAdcodeToId(result.addressComponent.adcode)
                     self.$nextTick()
                   }

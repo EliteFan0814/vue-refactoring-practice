@@ -1,0 +1,178 @@
+<template>
+  <el-dialog :title="item.id ?`修改文章：${item.title}`:'添加文章'" :visible.sync="dialogVisible" :close-on-click-modal="false" @close="close" width="900px" :center="true">
+    <el-form :model="innerItem" ref="innerItem" :rules="rules" label-width="13%">
+      <!-- <el-form-item label="平台类型：" prop="titleClass">
+        <el-input class="inp" placeholder="请输入标题" v-model="innerItem.title"></el-input>
+      </el-form-item> -->
+      <!-- <el-form-item label="平台类型：" prop="titleClass">
+          <el-select v-model="innerItem.titleClass" placeholder="请选择平台类型" class="inp" >
+            <el-option label="一" value="shanghai"></el-option>
+            <el-option label="二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item> -->
+      <el-form-item label="标题：" prop="title">
+        <el-input class="inp" placeholder="请输入标题" v-model="innerItem.title"></el-input>
+      </el-form-item>
+      <el-form-item v-if="!item.id" label="平台类型：" prop="cate">
+        <el-select v-model="innerItem.cate" placeholder="请选择平台类型" style="width:85%;">
+          <el-option v-for="item in catelist" :key="item.value" :label="item.label" :value="item.value" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="排序权重：" prop="sort">
+        <el-input class="inp" placeholder="请输入权重" v-model="innerItem.sort" @input="transToNumberStr($event,'sort')"></el-input>
+      </el-form-item>
+      <el-form-item label="内容：" prop="content">
+        <Editor class="inp" id="tinymce" :content="innerItem.content" @changed="(value)=>{this.innerItem.content=value}"></Editor>
+      </el-form-item>
+    </el-form>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="close">取 消</el-button>
+      <el-button type="primary" @click="submit">确 定</el-button>
+    </span>
+  </el-dialog>
+</template>
+
+<script>
+import Editor from '@/components/RichText'
+
+export default {
+  props: ['item', 'catelist'],
+  components: {
+    Editor
+  },
+  data() {
+    return {
+      dialogVisible: true,
+      innerItem: {
+        id: '',
+        title: '',
+        content: '',
+        sort: '',
+        cate: ''
+      },
+      rules: {
+        title: [{ required: true, message: '请输入标题' }],
+        sort: [{ required: true, message: '请输入权重' }],
+        cate: [{ required: true, message: '请选择平台类型' }],
+        content: [{ required: true, message: '请输入内容' }]
+      }
+    }
+  },
+  created() {
+    // this.innerItem = JSON.parse(JSON.stringify(this.item))
+    // 如果文章存在，则获取文章详情
+    if (this.item.id) {
+      this.$http
+        .get('/manage/article/info', {
+          params: {
+            id: this.item.id
+          }
+        })
+        .then(res => {
+          if (res.code) {
+            this.innerItem = { ...this.innerItem, ...res.data }
+          }
+        })
+    }
+    // if (this.$route.name === 'CommonProblem') {
+    //   this.typeId = 'common_problem'
+    // } else {
+    //   this.typeId = 'platform_placard'
+    // }
+  },
+  methods: {
+    close() {
+      this.dialogVisible = false
+      this.$emit('close')
+    },
+    // 转换为数字
+    transToNumberStr(val, str) {
+      this.innerItem[str] = val
+        .replace(/[^0-9.]/g, '')
+        .replace('.', '#*')
+        .replace(/\./g, '')
+        .replace('#*', '.')
+    },
+    submit() {
+      this.$refs.innerItem.validate(valid => {
+        if (!valid) return
+        if (this.innerItem.id) {
+          this.$http
+            .post('/manage/article/edit', this.innerItem)
+            .then(res => {
+              if (res.code) {
+                this.$emit('close', 1)
+              }
+            })
+            .catch(err => {})
+        } else {
+          this.$http
+            .post('/manage/article/add', this.innerItem)
+            .then(res => {
+              if (res.code) {
+                this.$emit('close', 1)
+              }
+            })
+            .catch(err => {})
+        }
+
+        // let params = new FormData()
+        // params.append('title', this.innerItem.title)
+        // params.append('content', this.innerItem.content)
+        // if (this.innerItem.id) {
+        //   params.append('id', this.innerItem.id)
+        //   this.$http.post('/api/Article/Modify', params).then(res => {
+        //     if (res.success) {
+        //       this.$message({
+        //         message: '恭喜你，修改成功！',
+        //         type: 'success'
+        //       })
+        //       this.$emit('close', '1')
+        //     }
+        //   })
+        // } else {
+        //   params.append('typeId', this.typeId)
+        //   this.$http.post('/api/Article/Publish', params).then(res => {
+        //     if (res.success) {
+        //       this.$message({
+        //         message: '恭喜你，添加成功！',
+        //         type: 'success'
+        //       })
+        //       this.$emit('close', '1')
+        //     }
+        //   })
+        // }
+      })
+    }
+  }
+}
+</script>
+<style>
+.sliderbox {
+  display: flex;
+  margin-left: 20px;
+}
+.inp {
+  width: 85%;
+  height: auto;
+}
+.slider {
+  width: 445px;
+}
+</style>
+<style scoped>
+.img {
+  width: 150px;
+  height: 150px;
+  border: 1px dashed black;
+  line-height: 150px;
+}
+img {
+  width: 150px;
+  height: 150px;
+}
+</style>
+
+
+
+

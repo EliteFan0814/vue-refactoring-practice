@@ -27,7 +27,7 @@
           </el-select>
         </div>
         <div :class="$style.search">
-          <el-select v-model="refund" placeholder="退款状态" size="small" @change="filterData" clearable>
+          <el-select v-model="refund" placeholder="纠纷处理" size="small" @change="filterData" clearable>
             <el-option v-for="item in refundList" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </div>
@@ -107,14 +107,14 @@
         <el-table-column label="支付方式" align="center">
           <template slot-scope="{row}">{{row.payment_str || '暂无信息'}}</template>
         </el-table-column>
-        <el-table-column label="退款状态" align="center">
+        <!-- <el-table-column label="退款状态" align="center">
           <template slot-scope="{row}">{{row.refund_str || '暂无信息'}}</template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column label="订单操作" align="center">
           <template slot-scope="{row}" v-if="row.status === 5">
             <div>
+              <el-button size="mini" v-if="row.refund !== 22&&row.refund!==23?true:false" type="warning" @click="setProblem(row)">设置纠纷</el-button>
               <el-button size="mini" v-if="row.refund === 22" type="primary" @click="resolveProblem(row)">处理纠纷</el-button>
-              <el-button size="mini" v-else type="warning" @click="setProblem(row)">设置纠纷</el-button>
             </div>
           </template>
         </el-table-column>
@@ -136,11 +136,11 @@ export default {
     RetailOrderResolve
   },
   created() {
-    if( this.$route.query.queryName){
-      console.log('this.$route.query',this.$route.query)
+    if (this.$route.query.queryName) {
+      console.log('this.$route.query', this.$route.query)
       let query = this.$route.query
       this.orderState = query.queryName
-      if(query.queryDate){
+      if (query.queryDate) {
         this.selectDate[0] = query.queryDate
         this.selectDate[1] = query.queryDate
       }
@@ -199,7 +199,9 @@ export default {
         .then(() => {
           this.$http
             .post('/manage/order/dispute', { order_id: data.order_id })
-            .then(res => {})
+            .then(res => {
+              this.getData()
+            })
         })
         .catch(() => {})
     },

@@ -2,8 +2,11 @@
   <div class="carousel">
     <el-dialog :title="item.id?'编辑轮播':'添加轮播'" :visible.sync="dialogFormVisible" label-width="100px" center width="40%" @close="closeDialog(false)">
       <el-form :model="form" :rules="rules" ref="form">
-        <el-form-item label="排序权重：" prop="sort">
-          <el-input class="one-line" v-model="form.sort" placeholder="请输入排序权重" @input="transToNumberStr($event,'sort')"></el-input>
+        <el-form-item label="轮播图片：" prop="picurl">
+          <el-upload action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :http-request="uploadSectionFile" list-type="picture-card">
+            <img v-if="form.picurl" :src="form.picurl" class="good-img">
+            <i v-else class="el-icon-plus"></i>
+          </el-upload>
         </el-form-item>
         <el-form-item label="跳转文章：" prop="jump_id">
           <el-select class="one-line" v-model="form.jump_id" filterable remote placeholder="请输入关键词" :remote-method="remoteMethod" :loading="loading">
@@ -11,11 +14,8 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="轮播图片：" prop="picurl">
-          <el-upload action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :http-request="uploadSectionFile" list-type="picture-card">
-            <img v-if="form.picurl" :src="form.picurl" class="good-img">
-            <i v-else class="el-icon-plus"></i>
-          </el-upload>
+        <el-form-item label="排序权重：" prop="sort">
+          <el-input class="one-line" v-model="form.sort" placeholder="请输入排序权重" @input="transToNumberStr($event,'sort')"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

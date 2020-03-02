@@ -29,9 +29,9 @@ export default {
       return [
         { path: '/member/MemberList', ...this.dataMsg.member_num }, // 会员人数
         { path: '/', ...this.dataMsg.member_day_num }, // 今日新增会员数
+        { path: '/masterMember/MemberList', ...this.dataMsg.worker_num }, // 师傅数
         { path: '/orderManage/RetailOrder', ...this.dataMsg.order_num, status: 5 }, // 订单数
         { path: '/orderManage/RetailOrder', ...this.dataMsg.order_day_num, status: 5, nowDate:this.nowDate }, // 今日订单数
-        { path: '/masterMember/MemberList', ...this.dataMsg.worker_num }, // 师傅数
         { path: '/', ...this.dataMsg.worker_money_finish } ,// 师傅余额总量
         { path: '/masterMember/MasterWithdraw', ...this.dataMsg.cash_num, status: 2 } ,// 待处理提现数
         { path: '/', ...this.dataMsg.money_num } ,// 今日总充值

@@ -27,16 +27,17 @@
         </el-table-column>
       </el-table>
       <PriceListEdit v-if="showEdit" :item="item" @close="closeDialog"></PriceListEdit>
-      <!-- <BasePagination :max="maxPage" :totalCount="totalCount" :now.sync="nowPage"></BasePagination> -->
+      <BasePagination :max="maxPage" :totalCount="totalCount" :now.sync="nowPage"></BasePagination>
     </el-card>
   </div>
 </template>
 
 <script>
-// import BasePagination from '@/components/BasePagination'
+import BasePagination from '@/components/BasePagination'
 import PriceListEdit from './PriceListEdit'
 export default {
   components: {
+    BasePagination,
     PriceListEdit
   },
   created() {
@@ -94,9 +95,15 @@ export default {
       // if (this.selectDate === null) {
       //   this.selectDate = []
       // }
-      this.$http.get('/manage/price_detail/lists').then(res => {
-        this.priceList = res.data.lists
-      })
+      this.$http
+        .get('/manage/price_detail/lists', {
+          params: { page: this.nowPage, rows: this.pageSize }
+        })
+        .then(res => {
+          this.priceList = res.data.lists
+          this.maxPage = res.data.page_total
+          this.totalCount = res.data.total
+        })
     },
     filterData() {
       this.nowPage === 1 ? this.getData() : (this.nowPage = 1)

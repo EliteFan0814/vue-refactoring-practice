@@ -7,7 +7,7 @@
         </el-button>
       </div>
       <el-table :data="activeList">
-        <el-table-column label="活动月份" align="center">
+        <el-table-column label="月/个" align="center">
           <template slot-scope="{row}">{{row.number}}</template>
         </el-table-column>
         <el-table-column label="活动价格" align="center">

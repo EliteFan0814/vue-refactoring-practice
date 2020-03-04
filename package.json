@@ -1,5 +1,5 @@
 {
-  "name": "senao-boss",
+  "name": "vue-refactoring-practice",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -41,10 +41,10 @@
   ],
   "description": "## Project setup ``` npm install ```",
   "main": "babel.config.js",
-  "author": "",
+  "author": "elitefan",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://code.aliyun.com/yiquchongzhi/yiquchongzhi_manage.git"
+    "url": "git+https://github.com/EliteFan0814/vue-refactoring-practice.git"
   }
 }

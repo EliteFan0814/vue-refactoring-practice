@@ -1,5 +1,5 @@
-document.title = "锁到开锁"
+document.title = "fantasy 管理后台"
 var config= { 
-  logintitle : "锁到开锁管理后台",
+  logintitle : "fantasy 管理后台",
 } 
  module.exports = config

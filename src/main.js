@@ -14,8 +14,7 @@ Vue.use(ElementUI)
 Vue.use(VueAMap);
 Vue.prototype.$config = config;
 VueAMap.initAMapApiLoader({
-  // key: 'c66ac6017f5ae9df99ebbc9b0cb7442c',
-  key: '6be7de40d996d166b728662d0aef2031',
+  key: '6be7de40d996d166b728662d0aefpc2031',
   plugin: ['AMap.Geocoder', 'AMap.Geolocation', 'AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
   // 默认高德 sdk 版本为 1.4.4
   v: '1.4.4',

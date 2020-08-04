@@ -1,9 +1,10 @@
 const navList = {
   state: {
-    list: [{
+    list: [
+      {
         title: '首页',
         index: '/',
-        icon: require('@/assets/-svg/home.svg'),
+        icon: require('@/assets/-svg/home.svg')
       },
       // 商品详情
       {
@@ -13,16 +14,16 @@ const navList = {
         children: [
           {
             title: '产品轮播',
-            index: '/mallManage/GoodCarousel',
+            index: '/mallManage/GoodCarousel'
           },
           {
             title: '产品列表',
-            index: '/mallManage/GoodsManage',
+            index: '/mallManage/GoodsManage'
           },
           {
             title: '价目列表',
-            index: '/mallManage/PriceList',
-          },
+            index: '/mallManage/PriceList'
+          }
           // {
           //   title: '服务流程',
           //   index: '/mallManage/ServiceProcess',
@@ -41,20 +42,21 @@ const navList = {
       {
         title: '会员管理',
         index: '/member/MemberList',
-        icon: require('@/assets/-svg/member.svg'),
+        icon: require('@/assets/-svg/member.svg')
       },
       // 订单管理
       {
         title: '订单管理',
         index: '/orderManage',
         icon: require('@/assets/-svg/order.svg'),
-        children: [{
+        children: [
+          {
             title: '订单列表',
-            index: '/orderManage/RetailOrder',
+            index: '/orderManage/RetailOrder'
           },
           {
             title: '派单',
-            index: '/orderManage/Dispatch',
+            index: '/orderManage/Dispatch'
           }
         ]
       },
@@ -63,7 +65,8 @@ const navList = {
         title: '师傅管理',
         index: '/masterMember',
         icon: require('@/assets/-svg/member.svg'),
-        children: [{
+        children: [
+          {
             title: '师傅列表',
             index: '/masterMember/MemberList'
           },
@@ -113,23 +116,24 @@ const navList = {
         title: '文章管理',
         index: '/article',
         icon: require('@/assets/-svg/article.svg'),
-        children: [{
+        children: [
+          {
             title: '平台公告',
-            index: '/article/OtherArticle',
+            index: '/article/OtherArticle'
           },
           {
             title: '单页文章',
-            index: '/article/UserAgreement',
-          },
+            index: '/article/UserAgreement'
+          }
         ]
       },
       // 系统参数
       {
         title: '系统设置',
         index: '/systemSetting/OtherSetting',
-        icon: require('@/assets/-svg/system.svg'),
-      },
-      // 升级申请 
+        icon: require('@/assets/-svg/system.svg')
+      }
+      // 升级申请
       // {
       //   title: '升级申请',
       //   index: '/upList/UpMemberList',

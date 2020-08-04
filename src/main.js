@@ -12,38 +12,51 @@ import 'element-ui/lib/theme-chalk/index.css'
 import config from './config'
 Vue.use(ElementUI)
 Vue.use(VueAMap)
-Vue.prototype.$config = config;
+Vue.prototype.$config = config
 VueAMap.initAMapApiLoader({
   key: '6be7de40d996d166b728662d0aefpc2031',
-  plugin: ['AMap.Geocoder', 'AMap.Geolocation', 'AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+  plugin: [
+    'AMap.Geocoder',
+    'AMap.Geolocation',
+    'AMap.Autocomplete',
+    'AMap.PlaceSearch',
+    'AMap.Scale',
+    'AMap.OverView',
+    'AMap.ToolBar',
+    'AMap.MapType',
+    'AMap.PolyEditor',
+    'AMap.CircleEditor'
+  ],
   // 默认高德 sdk 版本为 1.4.4
   v: '1.4.4',
   uiVersion: '1.0.11' // 高德UI组件版本号
 })
 
-
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-  if (store.state.token) { //如果有就直接到首页咯
-    next();
+  if (store.state.token) {
+    //如果有就直接到首页咯
+    next()
   } else {
-    if (to.path === '/login') { //如果是登录页面路径，就直接next()
-      next();
-    } else { //不然就跳转到登录；
-      next('/login');
+    if (to.path === '/login') {
+      //如果是登录页面路径，就直接next()
+      next()
+    } else {
+      //不然就跳转到登录；
+      next('/login')
     }
   }
 })
 // elementui 地址预览过滤器
-Vue.filter('elImgViewList', function (picUrl) {
+Vue.filter('elImgViewList', function(picUrl) {
   let arr = []
-      arr.push(picUrl)
-      return arr
+  arr.push(picUrl)
+  return arr
 })
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')

@@ -1,10 +1,12 @@
 <template>
-  <el-dialog :visible.sync="isDialog" :close-on-click-modal="false" @close="close" :title="'账户：'+form.account + ' 的账单'" width="65%" :center="true">
+  <el-dialog :visible.sync="isDialog" :close-on-click-modal="false" @close="close" :title="'账户：'+form.account + ' 的账单'"
+    width="65%" :center="true">
 
     <div :class="$style.header">
       <div :class="$style.search">
         <span>搜索：</span>
-        <el-date-picker v-model="selectDate" type="daterange" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="filterData">
+        <el-date-picker v-model="selectDate" type="daterange" value-format="yyyy-MM-dd" range-separator="至"
+          start-placeholder="开始日期" end-placeholder="结束日期" @change="filterData">
         </el-date-picker>
       </div>
       <div class="selectcontainer">
@@ -42,7 +44,7 @@ export default {
   data() {
     return {
       selectDate: ['', ''],
-      classlist:[],
+      classlist: [],
       billClass: 'cz',
       activeName: 'cz',
       tableData: [],
@@ -71,7 +73,7 @@ export default {
       this.getData()
     }
   },
-   created() {
+  created() {
     this.getData()
   },
   methods: {

@@ -61,8 +61,10 @@
       </el-table-column>
       <el-table-column label="会员状态" align="center">
         <template slot-scope="{row}">
-          <el-button size="mini" v-if="row.status === 1" type="primary" @click="changeState(row)">{{row.status_str}}</el-button>
-          <el-button size="mini" v-if="row.status === 0" type="danger" @click="changeState(row)">{{row.status_str}}</el-button>
+          <el-button size="mini" v-if="row.status === 1" type="primary" @click="changeState(row)">{{row.status_str}}
+          </el-button>
+          <el-button size="mini" v-if="row.status === 0" type="danger" @click="changeState(row)">{{row.status_str}}
+          </el-button>
         </template>
       </el-table-column>
       <el-table-column label="会员操作" min-width="200" align="center">
@@ -117,7 +119,7 @@ export default {
       maxPage: 1,
       totalCount: 0,
       showResetPwd: false,
-      showCharge:false,
+      showCharge: false,
       showBill: false,
       showOrder: false,
       item: {},
@@ -180,9 +182,9 @@ export default {
                 this.getData()
               }
             })
-            .catch(err => {})
+            .catch(err => { })
         })
-        .catch(err => {})
+        .catch(err => { })
     },
     // 充值
     // charge(data) {
@@ -234,7 +236,7 @@ export default {
                 this.getData()
               }
             })
-            .catch(err => {})
+            .catch(err => { })
         })
         .catch(() => {
           this.$message({
@@ -259,15 +261,15 @@ export default {
       this.showResetPwd = true
     },
     // 打开充值界面
-    charge(data){
+    charge(data) {
       this.item = data
       this.showCharge = true
     },
     // 关闭弹窗
-    closeDialog(flag){
+    closeDialog(flag) {
       this.showResetPwd = false
       this.showCharge = false
-      if(flag){
+      if (flag) {
         this.getData()
       }
     }

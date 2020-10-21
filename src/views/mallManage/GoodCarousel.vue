@@ -3,8 +3,8 @@
     <el-card>
       <div slot="header" :class="$style.header" class="my-header">
         <el-button @click="editGood(false)" type="primary">
-            添加轮播
-          </el-button>
+          添加轮播
+        </el-button>
         <!-- <div :class="$style.search">
           <span>搜索：</span>
           <el-input v-model="keyword" placeholder="请输入产品名称" clearable @change="filterData" />
@@ -163,19 +163,19 @@ export default {
     },
     editGood(data) {
       this.item = data
-      console.log('item',this.item)
+      console.log('item', this.item)
       this.showEdit = true
     },
-    deleteGood(data){
+    deleteGood(data) {
       this.$confirm('确定删除该轮播图?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(res=>{
-          this.$http.post('/manage/slider/del',{id:data.id}).then(res=>{
-            this.getData()
-          }).catch(err=>{})
-        })
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(res => {
+        this.$http.post('/manage/slider/del', { id: data.id }).then(res => {
+          this.getData()
+        }).catch(err => { })
+      })
     }
   }
 }

@@ -14,7 +14,8 @@ request.interceptors.request.use(
   config => {
     // 如果是 post 请求
     if (config.method == "post") {
-      // 如果请求参数不是 FormData 类型
+      // 如果请求参数不是 FormData 类型，就将对象序列化成键值对的形式放入请求体
+      // 如果是formData形式则可以直接传递
       if (!(config.data instanceof FormData)) {
         config.data = Qs.stringify(config.data)
         config.headers['Content-Type'] = 'application/x-www-form-urlencoded'

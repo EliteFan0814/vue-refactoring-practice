@@ -37,7 +37,9 @@
           </el-select>
         </div> -->
         <div>
-          <el-date-picker :class="$style.datesearch" v-model="selectDate" type="daterange" size="small" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="filterData">
+          <el-date-picker :class="$style.datesearch" v-model="selectDate" type="daterange" size="small"
+            value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+            @change="filterData">
           </el-date-picker>
         </div>
         <el-button @click="filterData" type="primary" size="small">
@@ -113,8 +115,10 @@
         <el-table-column label="订单操作" align="center">
           <template slot-scope="{row}" v-if="row.status === 5">
             <div>
-              <el-button size="mini" v-if="row.refund !== 22&&row.refund!==23?true:false" type="warning" @click="setProblem(row)">设置纠纷</el-button>
-              <el-button size="mini" v-if="row.refund === 22" type="primary" @click="resolveProblem(row)">处理纠纷</el-button>
+              <el-button size="mini" v-if="row.refund !== 22&&row.refund!==23?true:false" type="warning"
+                @click="setProblem(row)">设置纠纷</el-button>
+              <el-button size="mini" v-if="row.refund === 22" type="primary" @click="resolveProblem(row)">处理纠纷
+              </el-button>
             </div>
           </template>
         </el-table-column>
@@ -203,7 +207,7 @@ export default {
               this.getData()
             })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     // 关闭快递窗口
     closeDialog(flag) {

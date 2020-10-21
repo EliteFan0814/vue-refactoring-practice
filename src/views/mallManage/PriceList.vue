@@ -128,9 +128,9 @@ export default {
             .then(res => {
               this.getData()
             })
-            .catch(err => {})
+            .catch(err => { })
         })
-        .catch(err => {})
+        .catch(err => { })
     }
   }
 }

@@ -1,21 +1,25 @@
 <template>
   <div class="carousel">
-    <el-dialog :title="item.id?'编辑轮播':'添加轮播'" :visible.sync="dialogFormVisible" label-width="100px" center width="40%" @close="closeDialog(false)">
+    <el-dialog :title="item.id ? '编辑轮播' : '添加轮播'" :visible.sync="dialogFormVisible" label-width="100px" center
+      width="40%" @close="closeDialog(false)">
       <el-form :model="form" :rules="rules" ref="form">
         <el-form-item label="轮播图片：" prop="picurl">
-          <el-upload action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :http-request="uploadSectionFile" list-type="picture-card">
-            <img v-if="form.picurl" :src="form.picurl" class="good-img">
+          <el-upload action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
+            :http-request="uploadSectionFile" list-type="picture-card">
+            <img v-if="form.picurl" :src="form.picurl" class="good-img" />
             <i v-else class="el-icon-plus"></i>
           </el-upload>
         </el-form-item>
         <el-form-item label="跳转文章：" prop="jump_id">
-          <el-select class="one-line" v-model="form.jump_id" filterable remote placeholder="请输入关键词" :remote-method="remoteMethod" :loading="loading">
-            <el-option v-for="item in articleList" :key="item.id" :label="item.title" :value="item.id">
-            </el-option>
+          <el-select class="one-line" v-model="form.jump_id" filterable remote placeholder="请输入关键词"
+            :remote-method="remoteMethod" :loading="loading">
+            <el-option v-for="item in articleList" :key="item.id" :label="item.title" :value="item.id"> </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="排序权重：" prop="sort">
-          <el-input class="one-line" v-model="form.sort" placeholder="请输入排序权重" @input="transToNumberStr($event,'sort')"></el-input>
+          <el-input class="one-line" v-model="form.sort" placeholder="请输入排序权重"
+            @input="transToNumberStr($event, 'sort')">
+          </el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -43,9 +47,7 @@ export default {
       articleList: [],
       rules: {
         sort: [{ required: true, message: '请输入排序权重', trigger: 'blur' }],
-        jump_id: [
-          { required: true, message: '请选择跳转文章', trigger: 'blur' }
-        ],
+        jump_id: [{ required: true, message: '请选择跳转文章', trigger: 'blur' }],
         picurl: [{ required: true, message: '请上传轮播图片', trigger: 'blur' }]
       }
     }
@@ -63,15 +65,15 @@ export default {
     // 关闭弹窗
     closeDialog(flag) {
       if (flag) {
-        this.$refs.form.validate(valid => {
+        this.$refs.form.validate((valid) => {
           if (!valid) return
           if (this.item.id) {
-            this.$http.post('/manage/slider/edit', this.form).then(res => {
+            this.$http.post('/manage/slider/edit', this.form).then((res) => {
               this.dialogFormVisible = false
               this.$emit('close', true)
             })
           } else {
-            this.$http.post('/manage/slider/add', this.form).then(res => {
+            this.$http.post('/manage/slider/add', this.form).then((res) => {
               this.dialogFormVisible = false
               this.$emit('close', true)
             })
@@ -87,7 +89,7 @@ export default {
       let fileObj = param.file
       let form = new FormData()
       form.append('file', fileObj)
-      this.$http.post('/manage/Image/upload', form).then(res => {
+      this.$http.post('/manage/Image/upload', form).then((res) => {
         this.form.thumb = res.data.fileurl
         this.form.picurl = res.data.fileurl_str
       })

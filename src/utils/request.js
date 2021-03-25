@@ -11,9 +11,9 @@ const request = axios.create({
 })
 
 request.interceptors.request.use(
-  config => {
+  (config) => {
     // 如果是 post 请求
-    if (config.method == "post") {
+    if (config.method == 'post') {
       // 如果请求参数不是 FormData 类型，就将对象序列化成键值对的形式放入请求体
       // 如果是formData形式则可以直接传递
       if (!(config.data instanceof FormData)) {
@@ -31,16 +31,16 @@ request.interceptors.request.use(
     }
     return config
   },
-  err => {
+  (err) => {
     return Promise.reject(err)
   }
 )
 
 request.interceptors.response.use(
-  res => {
+  (res) => {
     if (res.data.success || res.data.code === 1) {
       // successcess
-      if (res.data.msg && res.data.msg != "ok") {
+      if (res.data.msg && res.data.msg != 'ok') {
         Message.success(res.data.msg)
       }
       return res.data
@@ -51,7 +51,7 @@ request.interceptors.response.use(
     // if (res.data.success || res.data.code === 1) return res.data
     return Promise.reject(res.data)
   },
-  err => {
+  (err) => {
     // token 失效
     if (err.response) {
       if (err.response.status === 401) {
@@ -63,8 +63,7 @@ request.interceptors.response.use(
         Message.error('没有操作权限')
       }
       if (err.response.status === 400) {
-        if (err.response.data && err.response.data.message)
-          Message.error(err.response.data.message)
+        if (err.response.data && err.response.data.message) Message.error(err.response.data.message)
         else {
           Message.error(JSON.stringify(err.response.data))
         }

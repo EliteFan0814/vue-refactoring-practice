@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 // elementui 地址预览过滤器
-Vue.filter('elImgViewList', function(picUrl) {
+Vue.filter('elImgViewList', function (picUrl) {
   let arr = []
   arr.push(picUrl)
   return arr
